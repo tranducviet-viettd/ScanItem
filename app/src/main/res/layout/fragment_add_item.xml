@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="viewmodel"
+            type="com.example.scanner.ui.fragment.add_item.AddItemViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:text="@string/addNewItem"
+            android:textSize="40sp"
+            android:gravity="center"
+            />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/itemImage"
+            android:layout_width="240dp"
+            android:layout_height="240dp"
+            android:layout_gravity="start"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textView"
+            app:cardCornerRadius="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            >
+
+            <ImageView
+                android:layout_width="240dp"
+                android:layout_height="240dp"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                tools:src="@tools:sample/avatars"
+                app:bind_image_url="@{viewmodel.itemImageUrl}"/>
+
+
+        </androidx.cardview.widget.CardView>
+
+        <ImageView
+            android:id="@+id/cameraBtn"
+            android:layout_width="60sp"
+            android:layout_height="60sp"
+            android:src="@drawable/camera_svgrepo_com"
+            app:layout_constraintLeft_toRightOf="@id/itemImage"
+            app:layout_constraintTop_toBottomOf="@id/textView"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginStart="12dp"
+            />
+
+        <TextView
+            android:id="@+id/itemNameText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/itemName"
+            android:textSize="20sp"
+            app:layout_constraintTop_toBottomOf="@id/itemImage"
+            app:layout_constraintStart_toStartOf="@id/itemImage"
+            android:layout_marginTop="12dp"/>
+
+        <EditText
+            android:id="@+id/itemNameEditText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/itemNameText"
+            app:layout_constraintStart_toStartOf="@id/itemNameText"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:text="@={viewmodel.nameEditText}"/>
+
+        <TextView
+            android:id="@+id/itemPriceText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/itemPrice"
+            android:textSize="20sp"
+            app:layout_constraintTop_toBottomOf="@id/itemNameEditText"
+            app:layout_constraintStart_toStartOf="@id/itemImage"
+            android:layout_marginTop="12dp"
+            />
+
+        <EditText
+            android:id="@+id/itemPriceEditText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/itemPriceText"
+            app:layout_constraintStart_toStartOf="@id/itemNameText"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:text="@={viewmodel.priceEditText}"/>
+
+        <TextView
+            android:id="@+id/itemCodeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/itemCode"
+            android:textSize="20sp"
+            app:layout_constraintTop_toBottomOf="@id/itemPriceEditText"
+            app:layout_constraintStart_toStartOf="@id/itemImage"
+            android:layout_marginTop="12dp"/>
+
+        <EditText
+            android:id="@+id/itemCodeEditText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/itemCodeText"
+            app:layout_constraintStart_toStartOf="@id/itemNameText"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:text="@={viewmodel.codeEditText}"/>
+
+        <Button
+            android:id="@+id/addItemBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/addItemBtn"
+            android:textSize="20sp"
+            app:layout_constraintTop_toBottomOf="@id/itemCodeEditText"
+            android:layout_marginTop="12dp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

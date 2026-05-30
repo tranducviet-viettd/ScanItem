@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Scanner</string>
+    <string name="addNewItem">Thêm mặt hàng mới</string>
+    <string name="itemName">Tên mặt hàng</string>
+    <string name="itemPrice">Giá tiền:</string>
+    <string name="itemCode">Mã vạch:</string>
+    <string name="addItemBtn">Thêm</string>
 </resources>

@@ -9,12 +9,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.example.scanner.databinding.FragmentTestBinding
+import com.example.scanner.databinding.FragmentHomeBinding
 import com.example.scanner.R
 
 class TestFragment : Fragment() {
 
-    private var _binding: FragmentTestBinding? = null
+    private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
     private val viewModel: TestViewModel by viewModels()
 
@@ -22,7 +22,7 @@ class TestFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentTestBinding.inflate(inflater, container, false)
+        _binding = FragmentHomeBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
         return binding.root

@@ -66,6 +66,12 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
+    // Firebase
+    implementation ("com.google.firebase:firebase-database:21.0.0")
+    implementation ("com.google.firebase:firebase-auth:23.2.0")
+    implementation ("com.google.firebase:firebase-storage:21.0.1")
+    implementation ("com.google.firebase:firebase-installations:19.0.1")
+
     //Navigation, lifecycle
     implementation ("androidx.navigation:navigation-fragment:2.8.9")
     implementation ("androidx.navigation:navigation-ui:2.8.9")
@@ -79,4 +85,16 @@ dependencies {
     implementation("androidx.camera:camera-camera2:1.3.0")
     implementation("androidx.camera:camera-lifecycle:1.3.0")
     implementation("androidx.camera:camera-view:1.3.0}")
+
+    implementation("androidx.concurrent:concurrent-futures:1.2.0")
+// Khuyến nghị thêm cho Kotlin
+    implementation("androidx.concurrent:concurrent-futures-ktx:1.2.0")
+    implementation("com.google.guava:guava:31.0.1-android")
+    //Cloudinary
+    implementation("com.cloudinary:cloudinary-android:3.0.2")
+
+    //Picasso
+    implementation ("com.squareup.picasso:picasso:2.71828")
+    implementation ("jp.wasabeef:picasso-transformations:2.4.0")
+
 }

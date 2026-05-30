@@ -3,27 +3,33 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@+id/testFragment">
+    app:startDestination="@id/homeFragment">
 
     <fragment
 
-        android:id="@+id/testFragment"
+        android:id="@+id/homeFragment"
         android:name="com.example.scanner.ui.fragment.TestFragment"
-        tools:layout="@layout/fragment_test">
+        tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_navigation_test_to_scanFragment"
-            app:destination="@id/scanFragment"/>
+            app:destination="@id/addItemFragment"/>
 
     </fragment>
+    <fragment
 
+        android:id="@+id/addItemFragment"
+        android:name="com.example.scanner.ui.fragment.add_item.AddItemFragment"
+        tools:layout="@layout/fragment_add_item">
+
+    </fragment>
     <fragment
         android:id="@+id/scanFragment"
         android:name="com.example.scanner.ui.fragment.ScanFragment"
         tools:layout="@layout/fragment_scan">
     <action
         android:id="@+id/action_scanFragment_to_TestFragment"
-        app:destination="@id/testFragment"
-        app:popUpTo="@id/testFragment"
+        app:destination="@id/homeFragment"
+        app:popUpTo="@id/homeFragment"
         app:popUpToInclusive="false" />
 </fragment>
 

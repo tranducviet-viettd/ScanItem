@@ -13,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.findNavController
+import com.example.scanner.data.db.repository.CloudinaryConfig
 import com.example.scanner.ui.theme.ScannerTheme
 
 class MainActivity : AppCompatActivity() {
@@ -21,7 +22,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
+        CloudinaryConfig.init(applicationContext)
         val navController = findNavController(R.id.nav_host_fragment)
 
     }
