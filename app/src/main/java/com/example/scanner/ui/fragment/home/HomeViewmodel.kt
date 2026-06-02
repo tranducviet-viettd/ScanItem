@@ -1,10 +1,10 @@
-package com.example.scanner.ui.fragment
+package com.example.scanner.ui.fragment.home
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class TestViewModel : ViewModel() {
+class HomeViewModel : ViewModel() {
     private val _barcode = MutableLiveData<String?>()
     val barcode: LiveData<String?> get() = _barcode
 

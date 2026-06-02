@@ -97,6 +97,7 @@
             android:id="@+id/itemPriceEditText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:inputType="number"
             app:layout_constraintTop_toBottomOf="@id/itemPriceText"
             app:layout_constraintStart_toStartOf="@id/itemNameText"
             app:layout_constraintEnd_toEndOf="parent"

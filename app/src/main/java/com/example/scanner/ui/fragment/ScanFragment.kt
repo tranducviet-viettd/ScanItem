@@ -60,7 +60,7 @@ class ScanFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.cancelButton.setOnClickListener {
-            findNavController().navigate(R.id.action_scanFragment_to_TestFragment)
+            findNavController().navigate(R.id.action_scanFragment_to_HomeFragment)
         }
 
         checkCameraPermission()
@@ -83,76 +83,60 @@ class ScanFragment : Fragment() {
         if (isScanning) return
         isScanning = true
 
-        lifecycleScope.launch {
-            try {
-                val cameraProvider = ProcessCameraProvider.getInstance(requireContext()).await()
+        val cameraProviderFuture = ProcessCameraProvider.getInstance(requireContext())
+        cameraProviderFuture.addListener({
+            val cameraProvider = cameraProviderFuture.get()
 
-                // Preview
-                val preview = Preview.Builder().build().also {
-                    it.setSurfaceProvider(binding.previewView.surfaceProvider)
-                }
-
-                // Image Analysis cho Barcode
-                val imageAnalyzer = ImageAnalysis.Builder()
-                    .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
-                    .build()
-                    .also { analysis ->
-                        analysis.setAnalyzer(cameraExecutor) { imageProxy ->
-                            processBarcode(imageProxy)
-                        }
-                    }
-
-                val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
-
-                cameraProvider.unbindAll()
-                cameraProvider.bindToLifecycle(
-                    this@ScanFragment,
-                    cameraSelector,
-                    preview,
-                    imageAnalyzer
-                )
-
-            } catch (e: Exception) {
-                Log.e("ScanFragment", "Lỗi khởi động camera", e)
-                Toast.makeText(requireContext(), "Không thể mở camera", Toast.LENGTH_SHORT).show()
-                findNavController().navigate(R.id.action_scanFragment_to_TestFragment)
+            // Cấu hình Preview
+            val preview = Preview.Builder().build().also {
+                it.setSurfaceProvider(binding.previewView.surfaceProvider)
             }
-        }
-    }
 
-    @OptIn(ExperimentalGetImage::class)
-    private fun processBarcode(imageProxy: androidx.camera.core.ImageProxy) {
-        val mediaImage = imageProxy.image
-        if (mediaImage != null) {
-            val image = InputImage.fromMediaImage(
-                mediaImage,
-                imageProxy.imageInfo.rotationDegrees
-            )
-
-            val scanner = BarcodeScanning.getClient()
-            scanner.process(image)
-                .addOnSuccessListener { barcodes ->
-                    if (barcodes.isNotEmpty() && !isScanning) {  // Tránh quét nhiều lần
-                        val barcode = barcodes[0].rawValue
-                        if (barcode != null) {
-                            isScanning = true
-                            setFragmentResult(
-                                SCAN_RESULT_KEY,
-                                Bundle().apply { putString(BARCODE_KEY, barcode) }
-                            )
-                            findNavController().navigate(R.id.action_scanFragment_to_TestFragment)
-                        }
+            // Cấu hình ImageAnalysis cho ML Kit
+            val imageAnalyzer = ImageAnalysis.Builder().build().also { analysis ->
+                analysis.setAnalyzer(cameraExecutor) { imageProxy ->
+                    val mediaImage = imageProxy.image
+                    if (mediaImage != null) {
+                        val image = InputImage.fromMediaImage(mediaImage, imageProxy.imageInfo.rotationDegrees)
+                        val scanner = BarcodeScanning.getClient()
+                        scanner.process(image)
+                            .addOnSuccessListener { barcodes ->
+                                if (barcodes.isNotEmpty()) {
+                                    val barcode = barcodes[0].rawValue // Lấy mã vạch đầu tiên
+                                    if (barcode != null) {
+                                        // Gửi kết quả về QuetMaVachFragment
+                                        setFragmentResult(
+                                            "SCAN_RESULT",
+                                            Bundle().apply { putString("BARCODE", barcode) }
+                                        )
+                                        if (findNavController().currentDestination?.id != R.id.showInfoItemFragment) {
+                                            findNavController().navigate(R.id.action_scanFragment_to_ShowInfoItemFragment)
+                                        }}
+                                }
+                                imageProxy.close()
+                            }
+                            .addOnFailureListener { e ->
+                                Log.e("ScanFragment", "Quét thất bại: ${e.message}")
+                                imageProxy.close()
+                            }
+                    } else {
+                        imageProxy.close()
                     }
-                    imageProxy.close()
                 }
-                .addOnFailureListener { e ->
-                    Log.e("ScanFragment", "Quét barcode thất bại: ${e.message}")
-                    imageProxy.close()
-                }
-        } else {
-            imageProxy.close()
-        }
+            }
+
+            val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
+            try {
+                cameraProvider.unbindAll()
+                cameraProvider.bindToLifecycle(this, cameraSelector, preview, imageAnalyzer)
+            } catch (e: Exception) {
+                Log.e("ScanFragment", "Không thể mở camera: ${e.message}")
+                Toast.makeText(requireContext(), "Lỗi mở camera", Toast.LENGTH_SHORT).show()
+                findNavController().navigate(R.id.action_scanFragment_to_HomeFragment)
+            }
+        }, ContextCompat.getMainExecutor(requireContext()))
     }
+
 
     override fun onRequestPermissionsResult(
         requestCode: Int,
@@ -165,7 +149,7 @@ class ScanFragment : Fragment() {
                 startCamera()
             } else {
                 Toast.makeText(requireContext(), "Cần quyền camera để quét mã", Toast.LENGTH_LONG).show()
-                findNavController().navigate(R.id.action_scanFragment_to_TestFragment)
+                findNavController().navigate(R.id.action_scanFragment_to_HomeFragment)
             }
         }
     }

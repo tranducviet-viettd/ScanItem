@@ -5,4 +5,5 @@
     <string name="itemPrice">Giá tiền:</string>
     <string name="itemCode">Mã vạch:</string>
     <string name="addItemBtn">Thêm</string>
+    <string name="searchItems">Search...</string>
 </resources>

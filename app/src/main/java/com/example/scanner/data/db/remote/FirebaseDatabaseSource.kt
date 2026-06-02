@@ -11,6 +11,7 @@ import com.example.scanner.data.db.Result
 import com.example.scanner.data.db.entity.Item
 import com.example.scanner.util.wrapSnapshotToArrayList
 import com.example.scanner.util.wrapSnapshotToClass
+import com.google.android.gms.tasks.Task
 import com.google.firebase.database.ChildEventListener
 
 class FirebaseDataSource {
@@ -25,7 +26,7 @@ class FirebaseDataSource {
     }
 
     //tạo người nghe dữ liệu và nếu dữ liệu thay đôỉ gắn dữ liệu vào bộ điều khiêển task
-    private fun attackValueListenerToTaskComplete(src : TaskCompletionSource<DataSnapshot>): ValueEventListener{
+    private fun attachValueListenerToTaskComplete(src : TaskCompletionSource<DataSnapshot>): ValueEventListener{
         return (
                 object : ValueEventListener{
                     override fun onDataChange(snapshot: DataSnapshot) {
@@ -40,7 +41,7 @@ class FirebaseDataSource {
 
     }
     // tạo người nghe dữ liệu và nếu dữ liệu thay đôỉ gọi hàm gọi lại b và truyền dữ liệu kiểu list
-    private fun <T> attackValueListenerToBlockList(resultClassName:Class<T>,b : (Result<MutableList<T>>) -> Unit) : ValueEventListener {
+    private fun <T> attachValueListenerToBlockList(resultClassName:Class<T>,b : (Result<MutableList<T>>) -> Unit) : ValueEventListener {
         return(
                 object : ValueEventListener{
                     override fun onDataChange(snapshot: DataSnapshot) {
@@ -55,7 +56,7 @@ class FirebaseDataSource {
     }
     // tạo người nghe dữ liệu và nếu dữ liệu thay đôỉ gọi hàm tương ứng và truyền dữ liệu kiểu list
 
-    private fun <T> attackValueListenerToBlock(resultClassName: Class<T>,  onAdded: (Result<T>) -> Unit, onChanged: (Result<T>) -> Unit, onRemove:(Result<T>) -> Unit) : ChildEventListener {
+    private fun <T> attachValueListenerToBlock(resultClassName: Class<T>,  onAdded: (Result<T>) -> Unit, onChanged: (Result<T>) -> Unit, onRemove:(Result<T>) -> Unit) : ChildEventListener {
         return( object : ChildEventListener{
             override fun onChildAdded(
                 snapshot: DataSnapshot,
@@ -98,6 +99,13 @@ class FirebaseDataSource {
             .addOnFailureListener { e ->
                 b.invoke(Result.Error(e.message ?: "Thêm mặt hàng mới THẤT BẠI"))
             }
+    }
+
+    fun loadItemTask(itemId: String):Task<DataSnapshot>{
+        val src = TaskCompletionSource<DataSnapshot>()
+        val listener= attachValueListenerToTaskComplete(src)
+        refToPath("items/$itemId").addListenerForSingleValueEvent(listener)
+        return src.task
     }
 
 

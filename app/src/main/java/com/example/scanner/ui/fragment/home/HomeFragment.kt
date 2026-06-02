@@ -1,5 +1,4 @@
-package com.example.scanner.ui.fragment
-
+package com.example.scanner.ui.fragment.home
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,14 +8,14 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.example.scanner.databinding.FragmentHomeBinding
 import com.example.scanner.R
+import com.example.scanner.databinding.FragmentHomeBinding
 
-class TestFragment : Fragment() {
+class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
-    private val viewModel: TestViewModel by viewModels()
+    private val viewModel: HomeViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,19 +30,16 @@ class TestFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Nhận kết quả từ ScanFragment
-        setFragmentResultListener("SCAN_RESULT") { _, bundle ->
-            val barcode = bundle.getString("BARCODE")
-            if (barcode != null) {
-                viewModel.updateBarcode(barcode)
-            }
-        }
 
         // Xử lý click nút Add
         binding.AddButton.setOnClickListener {
-            findNavController().navigate(R.id.action_navigation_test_to_scanFragment)
+            findNavController().navigate(R.id.action_navigation_home_to_addItemFragment)
+        }
+        binding.ShowInfoItemButton.setOnClickListener {
+            findNavController().navigate(R.id.action_navigation_home_to_scanFragment)
         }
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

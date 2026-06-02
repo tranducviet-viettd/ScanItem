@@ -31,11 +31,12 @@ class AddItemViewModel(private val context: Context
     private val storageRepository = StorageRepository()
     private val databaseRepository = DatabaseRepository()
     private val _itemImageUrl = MutableLiveData<String>("")   // giá trị mặc định là rỗng
+    val itemImageUrl: LiveData<String> = _itemImageUrl
 
     val nameEditText = MutableLiveData<String>("")
     val priceEditText = MutableLiveData<String>("")
     val codeEditText = MutableLiveData<String>("")
-    val itemImageUrl: LiveData<String> = _itemImageUrl
+
 
     private val _addItemResult = MutableLiveData<Result<String>>()
     val addItemResult : LiveData<Result<String>> = _addItemResult

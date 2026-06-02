@@ -8,11 +8,14 @@
     <fragment
 
         android:id="@+id/homeFragment"
-        android:name="com.example.scanner.ui.fragment.TestFragment"
+        android:name="com.example.scanner.ui.fragment.home.HomeFragment"
         tools:layout="@layout/fragment_home">
         <action
-            android:id="@+id/action_navigation_test_to_scanFragment"
+            android:id="@+id/action_navigation_home_to_addItemFragment"
             app:destination="@id/addItemFragment"/>
+        <action
+            android:id="@+id/action_navigation_home_to_scanFragment"
+            app:destination="@id/scanFragment"/>
 
     </fragment>
     <fragment
@@ -22,15 +25,27 @@
         tools:layout="@layout/fragment_add_item">
 
     </fragment>
+
     <fragment
         android:id="@+id/scanFragment"
         android:name="com.example.scanner.ui.fragment.ScanFragment"
         tools:layout="@layout/fragment_scan">
-    <action
-        android:id="@+id/action_scanFragment_to_TestFragment"
-        app:destination="@id/homeFragment"
-        app:popUpTo="@id/homeFragment"
-        app:popUpToInclusive="false" />
-</fragment>
+        <action
+            android:id="@+id/action_scanFragment_to_ShowInfoItemFragment"
+            app:destination="@id/showInfoItemFragment"
+             />
+        <action
+            android:id="@+id/action_scanFragment_to_HomeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/showInfoItemFragment"
+        android:name="com.example.scanner.ui.fragment.show_info_item.ShowInfoItemFragment"
+        tools:layout="@layout/fragment_show_info_item">
+
+    </fragment>
 
 </navigation>
