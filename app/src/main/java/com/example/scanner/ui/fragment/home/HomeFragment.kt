@@ -38,6 +38,9 @@ class HomeFragment : Fragment() {
         binding.ShowInfoItemButton.setOnClickListener {
             findNavController().navigate(R.id.action_navigation_home_to_scanFragment)
         }
+        binding.ListItemsButton.setOnClickListener {
+            findNavController().navigate(R.id.action_navigation_home_to_listItemsFragment)
+        }
     }
 
 

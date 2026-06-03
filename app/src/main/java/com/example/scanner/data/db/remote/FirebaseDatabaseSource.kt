@@ -107,6 +107,12 @@ class FirebaseDataSource {
         refToPath("items/$itemId").addListenerForSingleValueEvent(listener)
         return src.task
     }
+    fun loadItems():Task<DataSnapshot>{
+        val src = TaskCompletionSource<DataSnapshot>()
+        val listener= attachValueListenerToTaskComplete(src)
+        refToPath("items").addListenerForSingleValueEvent(listener)
+        return src.task
+    }
 
 
 

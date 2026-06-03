@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_navigation_home_to_scanFragment"
             app:destination="@id/scanFragment"/>
+        <action
+            android:id="@+id/action_navigation_home_to_listItemsFragment"
+            app:destination="@id/listItemFragment"/>
 
     </fragment>
     <fragment
@@ -46,6 +49,13 @@
         android:name="com.example.scanner.ui.fragment.show_info_item.ShowInfoItemFragment"
         tools:layout="@layout/fragment_show_info_item">
 
+    </fragment>
+
+    <fragment
+        android:id="@+id/listItemFragment"
+        android:name="com.example.scanner.ui.fragment.list_items.ItemsFragment"
+        tools:layout="@layout/fragment_list_items"
+        >
     </fragment>
 
 </navigation>

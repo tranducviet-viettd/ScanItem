@@ -3,6 +3,7 @@ package com.example.scanner.data.db.repository
 import com.example.scanner.data.db.Result
 import com.example.scanner.data.db.entity.Item
 import com.example.scanner.data.db.remote.FirebaseDataSource
+import com.example.scanner.util.wrapSnapshotToArrayList
 import com.example.scanner.util.wrapSnapshotToClass
 
 class DatabaseRepository {
@@ -19,4 +20,12 @@ class DatabaseRepository {
             b.invoke(Result.Success(wrapSnapshotToClass(Item::class.java,it)))
         }.addOnFailureListener { b.invoke(Result.Error(it.message)) }
     }
+
+    fun loadItems(b: (Result<MutableList<Item>>) -> Unit){
+        b.invoke(Result.Loading)
+        firebaseDataSource.loadItems().addOnSuccessListener {
+            b.invoke(Result.Success(wrapSnapshotToArrayList(Item::class.java,it)))
+        }.addOnFailureListener { b.invoke(Result.Error(it.message)) }
+    }
+
 }
