@@ -63,6 +63,107 @@
             tools:text="1000"
             />
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/incAndDecLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/itemPriceText">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/pieceGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                >
+
+                <TextView
+                    android:id="@+id/pieceTextView"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:textSize="35sp"
+                    android:gravity="center"
+                    android:text="@{viewmodel.pieceText}"
+                    tools:text="0"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    app:layout_constraintStart_toEndOf="@id/pieceTextView"
+                    app:layout_constraintBottom_toBottomOf="@id/pieceTextView"
+                    android:text="(cái)"
+                    android:textSize="20sp"
+                    android:layout_marginBottom="10dp"
+                    />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/packGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toEndOf="@id/pieceGroup"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginStart="10dp"
+                >
+                <TextView
+                    android:id="@+id/packTextView"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="35sp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:gravity="center"
+                    tools:text="0"
+                    android:text="@{viewmodel.packText}"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    app:layout_constraintStart_toEndOf="@id/packTextView"
+                    app:layout_constraintBottom_toBottomOf="@id/packTextView"
+                    android:text="(dây)"
+                    android:textSize="20sp"
+                    android:layout_marginBottom="10dp"
+                    />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/boxGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toEndOf="@id/packGroup"
+                app:layout_constraintTop_toTopOf="parent"
+                >
+                <TextView
+                    android:id="@+id/boxTextView"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="35sp"
+                    android:gravity="center"
+                    tools:text="0"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:text="@{viewmodel.boxText}"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    app:layout_constraintStart_toEndOf="@id/boxTextView"
+                    app:layout_constraintBottom_toBottomOf="@id/boxTextView"
+                    android:text="(thùng)"
+                    android:textSize="20sp"
+                    android:layout_marginBottom="10dp"
+                    />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

@@ -114,7 +114,7 @@
             android:layout_marginTop="12dp"/>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/incAndDecBtn"
+            android:id="@+id/incAndDecLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="@id/itemNumberText"
@@ -261,7 +261,7 @@
             android:layout_height="wrap_content"
             android:text="@string/itemCode"
             android:textSize="20sp"
-            app:layout_constraintTop_toBottomOf="@id/incAndDecBtn"
+            app:layout_constraintTop_toBottomOf="@id/incAndDecLayout"
             app:layout_constraintStart_toStartOf="@id/itemImage"
             android:layout_marginTop="12dp"/>
 

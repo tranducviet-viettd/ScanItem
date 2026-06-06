@@ -21,8 +21,19 @@ class ShowInfoItemViewModelFactory() : ViewModelProvider.Factory{
 
 class ShowInfoItemViewModel() : DefaultViewModel(){
 
-    private val _infoItem = MutableLiveData<Item?>()
-    val infoItem: LiveData<Item?> = _infoItem
+    private val _infoItem = MutableLiveData<Item>()
+    val infoItem: LiveData<Item> = _infoItem
+
+
+    private val _pieceText = MutableLiveData<String>()
+    val pieceText: LiveData<String> = _pieceText
+
+    private val _packText = MutableLiveData<String>()
+    val packText: LiveData<String> = _packText
+
+    private val _boxText = MutableLiveData<String>()
+    val boxText: LiveData<String> = _boxText
+
 
     private val databaseRepository = DatabaseRepository()
 
@@ -30,12 +41,15 @@ class ShowInfoItemViewModel() : DefaultViewModel(){
         databaseRepository.loadItem(itemID){ result ->
             if (result is Result.Success){
                 Log.d("ScanItem","2 : ${result.data}")
-                showInfoItem(result.data)
+                result.data?.let{showInfoItem(it)}
             }
         }
     }
-    fun showInfoItem(item: Item?) {
+    fun showInfoItem(item: Item) {
         _infoItem.value = item
+        _pieceText.value = item.quantity.piece.toString()
+        _packText.value = item.quantity.pack.toString()
+        _boxText.value = item.quantity.box.toString()
     }
 
 
