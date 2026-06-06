@@ -13,10 +13,12 @@ import com.example.scanner.databinding.FragmentAddItemBinding
 import com.example.scanner.databinding.FragmentShowInfoItemBinding
 import com.example.scanner.ui.fragment.add_item.AddItemViewModel
 import com.example.scanner.ui.fragment.add_item.AddItemViewModelFactory
-
+import com.example.scanner.data.db.entity.Item
 
 class ShowInfoItemFragment : Fragment(){
-
+    companion object {
+        const val ARGS_KEY_ITEM_CODE = "item_key"
+    }
     private lateinit var viewDataBinding: FragmentShowInfoItemBinding
 
     private val viewModel: ShowInfoItemViewModel by viewModels {
@@ -40,11 +42,15 @@ class ShowInfoItemFragment : Fragment(){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setFragmentResultListener("SCAN_RESULT") { _, bundle ->
-            val barcode = bundle.getString("BARCODE")
-            if (barcode != null) {
-                Log.d("ScanItem","1: ${barcode}")
-                viewModel.loadInfoItem(barcode)
+        val itemCode = arguments?.getString(ARGS_KEY_ITEM_CODE)
+        if (itemCode != null) {
+                viewModel.loadInfoItem(itemCode)           // Truyền trực tiếp Item
+            }
+        // Fallback: Nhận barcode từ ScanFragment
+        else {
+            setFragmentResultListener("SCAN_RESULT") { _, bundle ->
+                val barcode = bundle.getString("BARCODE")
+                barcode?.let { viewModel.loadInfoItem(it) }
             }
         }
         viewModel.infoItem.observe(viewLifecycleOwner) { item ->

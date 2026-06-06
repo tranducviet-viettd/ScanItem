@@ -34,14 +34,18 @@
         android:name="com.example.scanner.ui.fragment.ScanFragment"
         tools:layout="@layout/fragment_scan">
         <action
-            android:id="@+id/action_scanFragment_to_ShowInfoItemFragment"
-            app:destination="@id/showInfoItemFragment"
+            android:id="@+id/action_scanFragment_to_addItemFragment"
+            app:destination="@id/addItemFragment"
              />
         <action
             android:id="@+id/action_scanFragment_to_HomeFragment"
             app:destination="@id/homeFragment"
             app:popUpTo="@id/homeFragment"
             app:popUpToInclusive="false"/>
+        <action
+            android:id="@+id/action_scanFragment_to_ShowInfoItemFragment"
+            app:destination="@id/showInfoItemFragment"
+            />
     </fragment>
 
     <fragment
@@ -56,6 +60,9 @@
         android:name="com.example.scanner.ui.fragment.list_items.ItemsFragment"
         tools:layout="@layout/fragment_list_items"
         >
+        <action
+            android:id="@+id/action_listItemFragment_to_showInfoItemFragment"
+            app:destination="@id/showInfoItemFragment" />
     </fragment>
 
 </navigation>

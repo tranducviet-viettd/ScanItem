@@ -6,4 +6,5 @@
     <string name="itemCode">Mã vạch:</string>
     <string name="addItemBtn">Thêm</string>
     <string name="searchItems">Search...</string>
+    <string name="itemNumber">Số lượng mặt hàng:</string>
 </resources>

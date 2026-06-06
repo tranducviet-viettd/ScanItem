@@ -22,6 +22,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.scanner.R
 import com.example.scanner.databinding.FragmentScanBinding
+import com.example.scanner.util.fragmentDestinationFlag
 import com.google.mlkit.vision.barcode.BarcodeScanning
 import com.google.mlkit.vision.common.InputImage
 import kotlinx.coroutines.launch
@@ -109,9 +110,17 @@ class ScanFragment : Fragment() {
                                             "SCAN_RESULT",
                                             Bundle().apply { putString("BARCODE", barcode) }
                                         )
-                                        if (findNavController().currentDestination?.id != R.id.showInfoItemFragment) {
-                                            findNavController().navigate(R.id.action_scanFragment_to_ShowInfoItemFragment)
-                                        }}
+                                        if (fragmentDestinationFlag.flag == 0) {
+                                            if (findNavController().currentDestination?.id != R.id.showInfoItemFragment) {
+                                                findNavController().navigate(R.id.action_scanFragment_to_ShowInfoItemFragment)
+                                            }
+                                        }
+                                        else {
+                                            if (findNavController().currentDestination?.id != R.id.addItemFragment) {
+                                                findNavController().navigate(R.id.action_scanFragment_to_addItemFragment)
+                                            }
+                                        }
+                                    }
                                 }
                                 imageProxy.close()
                             }

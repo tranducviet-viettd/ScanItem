@@ -18,7 +18,7 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="30dp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -104,12 +104,164 @@
             android:text="@={viewmodel.priceEditText}"/>
 
         <TextView
+            android:id="@+id/itemNumberText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/itemNumber"
+            android:textSize="20sp"
+            app:layout_constraintTop_toBottomOf="@id/itemPriceEditText"
+            app:layout_constraintStart_toStartOf="@id/itemImage"
+            android:layout_marginTop="12dp"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/incAndDecBtn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/itemNumberText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/itemNumberText">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/pieceGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                >
+                <ImageButton
+                android:id="@+id/incPieceBtn"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/triangle_up_svgrepo_com_"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                    android:onClick="@{() -> viewmodel.increasePiece()}"/>
+
+            <ImageButton
+                android:id="@+id/decPieceBtn"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/triangle_down_svgrepo_com"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/incPieceBtn"
+                android:onClick="@{() -> viewmodel.decreasePiece()}"/>
+            <EditText
+                android:id="@+id/itemNumberEditText"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toEndOf="@id/incPieceBtn"
+                android:text="@={viewmodel.pieceEditText}"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                app:layout_constraintStart_toEndOf="@id/itemNumberEditText"
+                app:layout_constraintBottom_toBottomOf="@id/itemNumberEditText"
+                android:text="(cái)"
+                android:textSize="20sp"
+                android:layout_marginBottom="10dp"
+                />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/packGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toEndOf="@id/pieceGroup"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginStart="10dp"
+                >
+                <ImageButton
+                    android:id="@+id/incPackBtn"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/triangle_up_svgrepo_com_"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:onClick="@{() -> viewmodel.increasePack()}"/>
+
+                <ImageButton
+                    android:id="@+id/decPackBtn"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/triangle_down_svgrepo_com"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/incPackBtn"
+                    android:onClick="@{() -> viewmodel.decreasePack()}"/>
+                <EditText
+                    android:id="@+id/itemNumberEditText2"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/incPackBtn"
+                    android:text="@={viewmodel.packEditText}"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    app:layout_constraintStart_toEndOf="@id/itemNumberEditText2"
+                    app:layout_constraintBottom_toBottomOf="@id/itemNumberEditText2"
+                    android:text="(dây)"
+                    android:textSize="20sp"
+                    android:layout_marginBottom="10dp"
+                    />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/boxGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toEndOf="@id/packGroup"
+                app:layout_constraintTop_toTopOf="parent"
+                >
+                <ImageButton
+                    android:id="@+id/incBoxBtn"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/triangle_up_svgrepo_com_"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:onClick="@{() -> viewmodel.increaseBox()}"/>
+
+                <ImageButton
+                    android:id="@+id/decBoxBtn"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/triangle_down_svgrepo_com"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/incBoxBtn"
+                    android:onClick="@{() -> viewmodel.decreaseBox()}"/>
+                <EditText
+                    android:id="@+id/itemNumberEditText3"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/incBoxBtn"
+                    android:text="@={viewmodel.boxEditText}"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    app:layout_constraintStart_toEndOf="@id/itemNumberEditText3"
+                    app:layout_constraintBottom_toBottomOf="@id/itemNumberEditText3"
+                    android:text="(thùng)"
+                    android:textSize="20sp"
+                    android:layout_marginBottom="10dp"
+                    />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <TextView
             android:id="@+id/itemCodeText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/itemCode"
             android:textSize="20sp"
-            app:layout_constraintTop_toBottomOf="@id/itemPriceEditText"
+            app:layout_constraintTop_toBottomOf="@id/incAndDecBtn"
             app:layout_constraintStart_toStartOf="@id/itemImage"
             android:layout_marginTop="12dp"/>
 
@@ -129,7 +281,6 @@
             android:text="@string/addItemBtn"
             android:textSize="20sp"
             app:layout_constraintTop_toBottomOf="@id/itemCodeEditText"
-            android:layout_marginTop="12dp"
             app:layout_constraintStart_toStartOf="parent"
             android:gravity="center"
             app:layout_constraintEnd_toEndOf="parent"/>

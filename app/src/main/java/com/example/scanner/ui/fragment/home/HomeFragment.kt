@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.scanner.R
 import com.example.scanner.databinding.FragmentHomeBinding
+import com.example.scanner.util.fragmentDestinationFlag
 
 class HomeFragment : Fragment() {
 
@@ -33,9 +34,11 @@ class HomeFragment : Fragment() {
 
         // Xử lý click nút Add
         binding.AddButton.setOnClickListener {
-            findNavController().navigate(R.id.action_navigation_home_to_addItemFragment)
+            fragmentDestinationFlag.flag = 1
+            findNavController().navigate(R.id.action_navigation_home_to_scanFragment)
         }
         binding.ShowInfoItemButton.setOnClickListener {
+            fragmentDestinationFlag.flag = 0
             findNavController().navigate(R.id.action_navigation_home_to_scanFragment)
         }
         binding.ListItemsButton.setOnClickListener {

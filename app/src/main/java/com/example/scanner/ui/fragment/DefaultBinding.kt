@@ -1,6 +1,7 @@
 package com.example.scanner.ui.fragment
 
 import android.R
+import android.graphics.Bitmap
 import android.util.Log
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
@@ -13,7 +14,13 @@ fun bindImageUrl(imageView: ImageView, url : String?){
     when(url){
         null -> Unit
         "" -> loadImageFromAssets(imageView)
-        else -> Picasso.get().load(url).error(R.drawable.stat_notify_error).into(imageView)
+        else -> Picasso.get()
+            .load(url)
+            .error(R.drawable.stat_notify_error)
+            .resize(800, 800)
+            .centerCrop()
+            .config(Bitmap.Config.ARGB_8888)
+            .into(imageView)
     }
 
 }

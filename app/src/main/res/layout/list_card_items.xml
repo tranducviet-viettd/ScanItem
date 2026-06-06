@@ -20,8 +20,9 @@
         android:layout_marginEnd="12dp"
         android:layout_marginTop="16dp"
         android:clickable="true"
-        android:focusable="true">
-<!--        android:onClick="@{() -> viewmodel.selectItem(item)}"-->
+        android:focusable="true"
+        android:onClick="@{() -> viewmodel.selectItem(item)}">
+
 
         <androidx.cardview.widget.CardView
             android:id="@+id/imageCardView"

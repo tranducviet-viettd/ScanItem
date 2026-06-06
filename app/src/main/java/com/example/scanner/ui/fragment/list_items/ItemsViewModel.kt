@@ -1,9 +1,11 @@
 package com.example.scanner.ui.fragment.list_items
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.example.scanner.data.db.Event
 import com.example.scanner.data.db.Result
 import com.example.scanner.data.db.entity.Item
 import com.example.scanner.data.db.repository.DatabaseRepository
@@ -22,6 +24,8 @@ class ItemsViewModel (): DefaultViewModel(){
     val itemsList = MediatorLiveData<List<Item>>()
     private val updateItemsList= MutableLiveData<MutableList<Item>>()
 
+    private val _selectItemEvent = MutableLiveData<Event<Item>>()
+    val selectItemEvent : LiveData<Event<Item>> = _selectItemEvent
 
     init {
         itemsList.addSource(updateItemsList){ newItem ->
@@ -45,8 +49,8 @@ class ItemsViewModel (): DefaultViewModel(){
             }
         }
     }
-    fun clearUser(){
-        itemsList.value=emptyList()
+    fun selectItem(item: Item){
+        _selectItemEvent.value=Event(item)
     }
 
 

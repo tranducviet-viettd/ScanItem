@@ -6,6 +6,7 @@ import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.os.Environment
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -23,6 +24,10 @@ import java.io.File
 import java.io.FileOutputStream
 import com.example.scanner.data.db.Result
 import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.setFragmentResultListener
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class AddItemFragment : Fragment() {
 
@@ -53,6 +58,10 @@ class AddItemFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setFragmentResultListener("SCAN_RESULT") { _, bundle ->
+            val barcode = bundle.getString("BARCODE")
+            barcode?.let { viewModel.attachValueToCodeText(it) }
+        }
     }
 
     override fun onStart() {
@@ -131,57 +140,72 @@ class AddItemFragment : Fragment() {
             .setPositiveButton("OK") { dialog, _ -> dialog.dismiss() }
             .show()
     }
-    private fun checkAndRequestCameraPermission() {
+    // ==================== KHAI BÁO ====================
+    private var photoUri: Uri? = null
 
+    private val cameraPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { isGranted ->
+        if (isGranted) {
+            openCameraWithFullQuality()
+        } else {
+            Toast.makeText(requireContext(), "Cần quyền camera để chụp ảnh", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    // Launcher chụp ảnh full quality
+    private val cameraLauncher = registerForActivityResult(
+        ActivityResultContracts.TakePicture()
+    ) { success ->
+        if (success) {
+            photoUri?.let { uri ->
+                viewModel.sendImageToCloudinary(uri)
+            }
+        } else {
+            Toast.makeText(requireContext(), "Chụp ảnh thất bại", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+// ==================== HÀM CHÍNH ====================
+
+    private fun checkAndRequestCameraPermission() {
         when {
-            // Android 6.0 trở lên: luôn cần quyền CAMERA
             Build.VERSION.SDK_INT >= Build.VERSION_CODES.M -> {
                 if (ContextCompat.checkSelfPermission(
                         requireContext(),
                         Manifest.permission.CAMERA
                     ) == PackageManager.PERMISSION_GRANTED
                 ) {
-                    openCameraWithPreview()
+                    openCameraWithFullQuality()
                 } else {
                     cameraPermissionLauncher.launch(Manifest.permission.CAMERA)
                 }
             }
-
-            // Dưới Android 6: quyền được cấp tự động khi cài đặt
             else -> {
-                openCameraWithPreview()
+                openCameraWithFullQuality()
             }
         }
     }
-    private val cameraPermissionLauncher = registerForActivityResult(
-        ActivityResultContracts.RequestPermission()
-    ) { isGranted ->
-        if (isGranted) {
-            openCameraWithPreview()
-        } else {
-            Toast.makeText(requireContext(), "Cần quyền camera để chụp ảnh", Toast.LENGTH_SHORT).show()
-        }
-    }
-    private fun openCameraWithPreview() {
-        cameraPreviewLauncher.launch(null)  // Mở camera
-    }
-    private val cameraPreviewLauncher = registerForActivityResult(ActivityResultContracts.TakePicturePreview()) { bitmap ->
-        bitmap?.let {
-            val uri = saveBitmapToTempFile(it)
-            viewModel.sendImageToCloudinary(uri)
-        } ?: run {
-            Toast.makeText(requireContext(), "Chụp ảnh thất bại", Toast.LENGTH_SHORT).show()
-        }
-    }
-    private fun saveBitmapToTempFile(bitmap: Bitmap): Uri {
-        val file = File(requireContext().cacheDir, "preview_${System.currentTimeMillis()}.jpg")
-        FileOutputStream(file).use { out ->
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 90, out)
-        }
-        return FileProvider.getUriForFile(
+
+    private fun openCameraWithFullQuality() {
+        val photoFile = createImageFile()
+        photoUri = FileProvider.getUriForFile(
             requireContext(),
-            "com.example.scanner.fileprovider",
-            file
+            "com.example.scanner.fileprovider",   // Phải khớp với manifest
+            photoFile
+        )
+
+        cameraLauncher.launch(photoUri)
+    }
+
+    // Tạo file ảnh tạm thời
+    private fun createImageFile(): File {
+        val timeStamp = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(Date())
+        val storageDir = requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+        return File.createTempFile(
+            "JPEG_${timeStamp}_",
+            ".jpg",
+            storageDir
         )
     }
 
