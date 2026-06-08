@@ -33,9 +33,6 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
-    kotlinOptions {
-        jvmTarget = "11"
-    }
     buildFeatures {
         compose = true
         dataBinding = true
@@ -98,7 +95,14 @@ dependencies {
     //Picasso
     implementation ("com.squareup.picasso:picasso:2.71828")
     implementation ("jp.wasabeef:picasso-transformations:2.4.0")
+
     // SceneView
     implementation("io.github.sceneview:sceneview:4.18.0")
 
+}
+
+kotlin {
+    compilerOptions {
+        jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_11)
+    }
 }
