@@ -98,5 +98,7 @@ dependencies {
     //Picasso
     implementation ("com.squareup.picasso:picasso:2.71828")
     implementation ("jp.wasabeef:picasso-transformations:2.4.0")
+    // SceneView
+    implementation("io.github.sceneview:sceneview:4.18.0")
 
 }
