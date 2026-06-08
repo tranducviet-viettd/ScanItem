@@ -1,5 +1,7 @@
 package com.example.scanner
 
+// duchoang206 set
+
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
