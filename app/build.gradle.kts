@@ -98,6 +98,9 @@ dependencies {
 
     // SceneView
     implementation("io.github.sceneview:sceneview:4.18.0")
+    
+    // Compose Icons
+    implementation("androidx.compose.material:material-icons-extended")
 
 }
 
