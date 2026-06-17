@@ -15,18 +15,9 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/text"
-        android:text="@{viewModel.barcode ?? `Chưa quét mã vạch`}"
-        app:layout_constraintBottom_toTopOf="@id/AddButton"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        android:layout_height="match_parent"
+        android:padding="20dp"
+        >
 
 
 
@@ -36,8 +27,6 @@
         android:id="@+id/AddButton"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
         android:text="Add" />
 
         <Button
@@ -46,20 +35,25 @@
             android:id="@+id/ShowInfoItemButton"
             app:layout_constraintTop_toBottomOf="@id/AddButton"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
             android:text="Scan"
             />
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/ListItemsButton"
-            app:layout_constraintTop_toBottomOf="@id/AddButton"
-            app:layout_constraintStart_toEndOf="@id/ShowInfoItemButton"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ShowInfoItemButton"
+            app:layout_constraintStart_toStartOf="parent"
             android:text="List Item"
             />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/storeMapButton"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ListItemsButton"
+            android:text="Map"
+            />
+
 
 
 

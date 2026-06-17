@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_navigation_home_to_listItemsFragment"
             app:destination="@id/listItemFragment"/>
+        <action
+            android:id="@+id/action_navigation_home_to_storeMapFragment"
+            app:destination="@id/storeMapFragment"/>
 
     </fragment>
     <fragment
@@ -31,7 +34,7 @@
 
     <fragment
         android:id="@+id/scanFragment"
-        android:name="com.example.scanner.ui.fragment.ScanFragment"
+        android:name="com.example.scanner.ui.fragment.scan.ScanFragment"
         tools:layout="@layout/fragment_scan">
         <action
             android:id="@+id/action_scanFragment_to_addItemFragment"
@@ -63,6 +66,12 @@
         <action
             android:id="@+id/action_listItemFragment_to_showInfoItemFragment"
             app:destination="@id/showInfoItemFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/storeMapFragment"
+        android:name="com.example.scanner.ui.fragment.store_map.StoreMapFragment">
+        />
     </fragment>
 
 </navigation>

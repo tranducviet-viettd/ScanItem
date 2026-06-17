@@ -44,6 +44,9 @@ class HomeFragment : Fragment() {
         binding.ListItemsButton.setOnClickListener {
             findNavController().navigate(R.id.action_navigation_home_to_listItemsFragment)
         }
+        binding.storeMapButton.setOnClickListener {
+            findNavController().navigate(R.id.action_navigation_home_to_storeMapFragment)
+        }
     }
 
 

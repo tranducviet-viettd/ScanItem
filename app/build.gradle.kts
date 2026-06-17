@@ -8,7 +8,7 @@ plugins {
 
 android {
     namespace = "com.example.scanner"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.example.scanner"
@@ -33,9 +33,7 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
-    kotlinOptions {
-        jvmTarget = "11"
-    }
+
     buildFeatures {
         compose = true
         dataBinding = true
@@ -86,7 +84,7 @@ dependencies {
 
     implementation("androidx.camera:camera-camera2:1.3.0")
     implementation("androidx.camera:camera-lifecycle:1.3.0")
-    implementation("androidx.camera:camera-view:1.3.0}")
+    implementation("androidx.camera:camera-view:1.3.0")
 
     implementation("androidx.concurrent:concurrent-futures:1.2.0")
 // Khuyến nghị thêm cho Kotlin
@@ -99,6 +97,14 @@ dependencies {
     implementation ("com.squareup.picasso:picasso:2.71828")
     implementation ("jp.wasabeef:picasso-transformations:2.4.0")
     // SceneView
-    implementation("io.github.sceneview:sceneview:4.18.0")
+    implementation("io.github.sceneview:sceneview:4.0.5")
 
+    implementation("androidx.compose.material:material-icons-extended")
+
+
+}
+kotlin {
+    compilerOptions {
+        jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_11)
+    }
 }
