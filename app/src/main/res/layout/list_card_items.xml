@@ -73,7 +73,7 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintLeft_toRightOf="@id/imageCardView"
             tools:text="Status"
-            android:text="@{item.price}"
+            android:text="@{item.price.piece}"
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

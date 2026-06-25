@@ -9,7 +9,9 @@
             name="viewmodel"
             type="com.example.scanner.ui.fragment.add_item.AddItemViewModel" />
     </data>
-
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -93,15 +95,71 @@
             android:layout_marginTop="12dp"
             />
 
+        <TextView
+            android:id="@+id/piecePriceText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/itemPriceText"
+            app:layout_constraintStart_toStartOf="@id/itemPriceText"
+            android:text="1 Cái: "
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="30dp"
+            android:textSize="20sp"/>
         <EditText
-            android:id="@+id/itemPriceEditText"
+            android:id="@+id/piecePriceEditText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:inputType="number"
+            android:layout_marginBottom="10dp"
             app:layout_constraintTop_toBottomOf="@id/itemPriceText"
-            app:layout_constraintStart_toStartOf="@id/itemNameText"
+            app:layout_constraintStart_toEndOf="@id/piecePriceText"
             app:layout_constraintEnd_toEndOf="parent"
-            android:text="@={viewmodel.priceEditText}"/>
+            app:layout_constraintBottom_toBottomOf="@id/piecePriceText"
+            android:text="@={viewmodel.priceEditText.piece}"/>
+
+        <TextView
+            android:id="@+id/packPriceText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/piecePriceEditText"
+            app:layout_constraintStart_toStartOf="@id/itemPriceText"
+            android:text="1 Dây: "
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="30dp"
+            android:textSize="20sp"/>
+        <EditText
+            android:id="@+id/packPriceEditText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:layout_marginBottom="10dp"
+            app:layout_constraintTop_toBottomOf="@id/piecePriceEditText"
+            app:layout_constraintStart_toEndOf="@id/piecePriceText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/packPriceText"
+            android:text="@={viewmodel.priceEditText.pack}"/>
+
+        <TextView
+            android:id="@+id/boxPriceText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/packPriceText"
+            app:layout_constraintStart_toStartOf="@id/itemPriceText"
+            android:text="1 Thùng: "
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="30dp"
+            android:textSize="20sp"/>
+        <EditText
+            android:id="@+id/boxPriceEditText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:layout_marginBottom="10dp"
+            app:layout_constraintTop_toBottomOf="@id/packPriceEditText"
+            app:layout_constraintStart_toEndOf="@id/boxPriceText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/boxPriceText"
+            android:text="@={viewmodel.priceEditText.box}"/>
 
         <TextView
             android:id="@+id/itemNumberText"
@@ -109,7 +167,7 @@
             android:layout_height="wrap_content"
             android:text="@string/itemNumber"
             android:textSize="20sp"
-            app:layout_constraintTop_toBottomOf="@id/itemPriceEditText"
+            app:layout_constraintTop_toBottomOf="@id/boxPriceText"
             app:layout_constraintStart_toStartOf="@id/itemImage"
             android:layout_marginTop="12dp"/>
 
@@ -285,5 +343,5 @@
             android:gravity="center"
             app:layout_constraintEnd_toEndOf="parent"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
-
+    </ScrollView>
 </layout>

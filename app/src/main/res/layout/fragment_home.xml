@@ -53,6 +53,14 @@
             app:layout_constraintTop_toBottomOf="@id/ListItemsButton"
             android:text="Map"
             />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/scanToPayButton"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/storeMapButton"
+            android:text="Scan To Pay"
+            />
 
 
 

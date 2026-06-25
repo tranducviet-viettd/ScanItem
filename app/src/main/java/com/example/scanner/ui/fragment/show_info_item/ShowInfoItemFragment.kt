@@ -58,7 +58,7 @@ class ShowInfoItemFragment : Fragment(){
                 // Bind dữ liệu lên UI
                 Log.d("ScanItem","3: ${item}")
                 viewDataBinding.itemNameText.text = item.name
-                viewDataBinding.itemPriceText.text = "${item.price} đ"
+                viewDataBinding.itemPriceText.text = "${item.price.piece} đ"
                 // ... bind các field khác
             } else {
                 Toast.makeText(requireContext(), "Không tìm thấy sản phẩm", Toast.LENGTH_SHORT).show()

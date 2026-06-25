@@ -13,6 +13,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import com.example.scanner.data.db.Result
 import com.example.scanner.data.db.entity.Item
+import com.example.scanner.data.db.entity.Price
 import com.example.scanner.data.db.entity.Quantity
 import com.example.scanner.data.db.repository.DatabaseRepository
 import com.example.scanner.data.db.repository.StorageRepository
@@ -35,7 +36,7 @@ class AddItemViewModel(private val context: Context
     val itemImageUrl: LiveData<String> = _itemImageUrl
 
     val nameEditText = MutableLiveData<String>("")
-    val priceEditText = MutableLiveData<String>("")
+    val priceEditText = MutableLiveData<Price>(Price("0","0","0"))
     val codeEditText = MutableLiveData<String>("")
 
     private val _pieceEditText = MutableLiveData<String>("0")
@@ -60,7 +61,7 @@ class AddItemViewModel(private val context: Context
 
     }
     fun addItem(){
-        if(nameEditText.value.isNullOrBlank() || priceEditText.value.isNullOrBlank() || codeEditText.value.isNullOrBlank()){
+        if(nameEditText.value.isNullOrBlank() || priceEditText.value!!.piece.isBlank() || priceEditText.value!!.pack.isBlank() || priceEditText.value!!.box.isBlank()||codeEditText.value.isNullOrBlank()){
             _addItemResult.value = Result.Error("Không được để trống ")
             return
         }

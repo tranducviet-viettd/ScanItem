@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_navigation_home_to_storeMapFragment"
             app:destination="@id/storeMapFragment"/>
+        <action
+            android:id="@+id/action_navigation_home_to_scanToPayFragment"
+            app:destination="@id/scanToPayFragment"/>
 
     </fragment>
     <fragment
@@ -71,7 +74,12 @@
     <fragment
         android:id="@+id/storeMapFragment"
         android:name="com.example.scanner.ui.fragment.store_map.StoreMapFragment">
-        />
+
+    </fragment>
+    <fragment
+        android:id="@+id/scanToPayFragment"
+        android:name="com.example.scanner.ui.fragment.scan_to_pay.ScanToPayFragment">
+
     </fragment>
 
 </navigation>
