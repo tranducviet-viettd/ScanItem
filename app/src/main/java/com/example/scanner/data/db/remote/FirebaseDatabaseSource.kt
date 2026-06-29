@@ -1,5 +1,6 @@
 package com.example.scanner.data.db.remote
 
+import android.util.Log
 import com.google.android.gms.tasks.TaskCompletionSource
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -9,6 +10,7 @@ import com.google.firebase.database.ValueEventListener
 
 import com.example.scanner.data.db.Result
 import com.example.scanner.data.db.entity.Item
+import com.example.scanner.data.db.entity.User
 import com.example.scanner.util.wrapSnapshotToArrayList
 import com.example.scanner.util.wrapSnapshotToClass
 import com.google.android.gms.tasks.Task
@@ -27,6 +29,7 @@ class FirebaseDataSource {
 
     //tạo người nghe dữ liệu và nếu dữ liệu thay đôỉ gắn dữ liệu vào bộ điều khiêển task
     private fun attachValueListenerToTaskComplete(src : TaskCompletionSource<DataSnapshot>): ValueEventListener{
+        Log.d("doi","25")
         return (
                 object : ValueEventListener{
                     override fun onDataChange(snapshot: DataSnapshot) {
@@ -101,6 +104,10 @@ class FirebaseDataSource {
             }
     }
 
+    fun updateNewUser(user: User): Task<Void>{
+        Log.d("doi","44")
+        return refToPath("users/${user.info.id}").setValue(user)
+    }
     fun loadItemTask(itemId: String):Task<DataSnapshot>{
         val src = TaskCompletionSource<DataSnapshot>()
         val listener= attachValueListenerToTaskComplete(src)
@@ -111,6 +118,23 @@ class FirebaseDataSource {
         val src = TaskCompletionSource<DataSnapshot>()
         val listener= attachValueListenerToTaskComplete(src)
         refToPath("items").addListenerForSingleValueEvent(listener)
+        return src.task
+    }
+    fun loadUserInfo(uid: String):Task<DataSnapshot>{
+        Log.d("doi","31")
+        val src = TaskCompletionSource<DataSnapshot>()
+        val listener= attachValueListenerToTaskComplete(src)
+        refToPath("users/${uid}/info").addListenerForSingleValueEvent(listener)
+        return src.task
+    }
+
+    fun loadCustomer(uid:String):Task<DataSnapshot>{
+        Log.d("doi","24")
+        val src = TaskCompletionSource<DataSnapshot>()
+        val listener= attachValueListenerToTaskComplete(src)
+        Log.d("doi","26")
+        refToPath("users/${uid}").addListenerForSingleValueEvent(listener)
+        Log.d("doi","27")
         return src.task
     }
 

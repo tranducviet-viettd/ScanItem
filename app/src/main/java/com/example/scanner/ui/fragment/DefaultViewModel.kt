@@ -7,6 +7,10 @@ import com.example.scanner.data.db.Event
 import com.example.scanner.data.db.Result
 
 abstract class DefaultViewModel :ViewModel(){
+
+    protected val mSnackBarText= MutableLiveData<Event<String>>()
+    val snackBarText : LiveData<Event<String>> = mSnackBarText
+
     protected val mDataLoading=MutableLiveData<Event<Boolean>>()
     val dataLoading: LiveData<Event<Boolean>> = mDataLoading
 

@@ -24,7 +24,14 @@
             app:destination="@id/storeMapFragment"/>
         <action
             android:id="@+id/action_navigation_home_to_scanToPayFragment"
-            app:destination="@id/scanToPayFragment"/>
+            app:destination="@id/scanToPayFragment" />
+        <action
+            android:id="@+id/action_navigation_home_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_navigation_home_to_createAccountFragment"
+            app:destination="@id/createAccountFragment" />
+
 
     </fragment>
     <fragment
@@ -81,5 +88,19 @@
         android:name="com.example.scanner.ui.fragment.scan_to_pay.ScanToPayFragment">
 
     </fragment>
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.scanner.ui.fragment.login.LoginFragment">
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/createAccountFragment"
+        android:name="com.example.scanner.ui.fragment.create_account.CreateAccountFragment">
+
+    </fragment>
+
+
 
 </navigation>
